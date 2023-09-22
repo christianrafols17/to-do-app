@@ -16,8 +16,8 @@
 .content {
     display: flex;
     flex-grow: 1;
-    align-items: start;
-    justify-content: start;
+    align-items: flex-start;
+    justify-content: flex-start;
     padding-left: 1em;
 }
 .todo:nth-child(even) {
