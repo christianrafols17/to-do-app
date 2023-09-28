@@ -1,11 +1,18 @@
-<div class="todos">
-    <form (submit)="addTodo()">
-        <input type="text" name="inputTodo" placeholder="Enter todo..." class="todo-input" [(ngModel)]="inputTodo" required/>
-        <input type="submit" value="Submit" class="todo-submit">
+<div class="flex flex-col md:w-[620px] justify-center items-center mx-auto p-2 bg-blue-400">
+    <form class="flex flex-row w-full justify-between py-2">
+        <input type="text" name="inputTodo" placeholder="Enter todo..." class="text-xl bg-blue-100 w-full p-2 text-black rounded-md" [(ngModel)]="todoValue"/>
+        <input type="submit" value="Submit" class=" bg-blue-600 px-4 ms-2 rounded-md" (click)="addTodo()">
     </form>
-    <div *ngFor="let todo of todos; let i = index;" class="todo {{ (todo.completed ? 'done' : '')}}">
-        <div class="id">{{ i }}</div>
-        <div class="content" (click)="toggleDone(i)">{{ todo.content }}</div>
-        <button class="delete" (click)="deleteTodo(i)">Remove</button>
+    <h1 class="text-xl me-auto mb-2 px-2 bg-red-400 w-full">To-Do List</h1>
+    <div class="flex flex-row w-full justify-between items-center px-2 py-2 mb-1 even:bg-gray-200 odd:bg-gray-400" *ngFor="let todo of todoList; let i=index;">
+        <input type="checkbox" class="" [(ngModel)]="todo.value" (ngModelChange)="changeTodo(i)"/>
+        <div class=" text-xl mr-auto ps-4"> {{todo.content}} </div>
+        <button class="text-base bg-red-600 p-2 text-white rounded-md " (click)="removeTodo(i)">Remove</button>
+    </div>
+    <h1 class="text-xl me-auto mb-2 mt-1 px-2 bg-green-400 w-full" *ngIf="finishedList.length > 0">Finished List</h1>
+    <div class="flex flex-row w-full justify-between items-center px-2 py-2 mb-1 even:bg-gray-200 odd:bg-gray-400" *ngFor="let todo of finishedList; let i=index;">
+        <input type="checkbox" class="" [(ngModel)]="todo.value" (ngModelChange)="changeFinished(i)"/>
+        <div class=" text-xl mr-auto ps-4"> {{todo.content}} </div>
+        <button class="text-base bg-red-600 p-2 text-white rounded-md " (click)="removeFinished(i)">Remove</button>
     </div>
 </div>

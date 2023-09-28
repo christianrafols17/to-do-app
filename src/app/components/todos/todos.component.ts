@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Todo } from './../../models/Todo'
+import { Component } from '@angular/core';
+import { Todo } from '../../models/Todo'
 
 @Component({
   selector: 'app-todos',
@@ -7,42 +7,45 @@ import { Todo } from './../../models/Todo'
   styleUrls: ['./todos.component.css']
 })
 
-export class TodosComponent implements OnInit{
+export class TodosComponent {
+  todoValue: String = '';
+  
+  todoList: Todo[] = [
+    {
+      content: "Todo 1",
+      value: false
+    },
+    {
+      content: "Todo 2",
+      value: false
+    }
+  ];
 
-  todos:Todo[] = []
+  finishedList: Todo[] = [
 
-  inputTodo:string = ''
+  ]
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.todos = [
-      {
-        content: 'First Todo',
-        completed: false
-      },
-      {
-        content: 'Second Todo',
-        completed: false
-      }
-    ]
-  }
-
-  toggleDone(id:number) {
-    this.todos.map((value, i) => {
-      if (i === id) value.completed = !value.completed;
-
-      return value;
-    })
-  }
-  deleteTodo(id:number) {
-    this.todos = this.todos.filter((value, i) => i !== id);
-  }
   addTodo() {
-    this.todos.push({
-      content: this.inputTodo,
-      completed: false
-    });
-    this.inputTodo = ''
+    this.todoList.push({content: this.todoValue, value: false});
+    this.todoValue = "";
+  }
+
+  changeTodo(i: number) {
+    const item = this.todoList.splice(i, 1);
+    this.finishedList.push(item[0]);
+  }
+
+  changeFinished(i: number) {
+    const item = this.finishedList.splice(i, 1);
+    this.todoList.push(item[0]);
+  }
+
+  removeTodo(i: number) {
+    this.todoList.splice(i, 1);
+  }
+
+  removeFinished(i: number) {
+    this.finishedList.splice(i, 1);
   }
 }
