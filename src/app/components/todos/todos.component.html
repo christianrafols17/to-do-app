@@ -1,18 +1,22 @@
-<div class="flex flex-col md:w-[620px] justify-center items-center mx-auto p-2 bg-blue-400">
-    <form class="flex flex-row w-full justify-between py-2">
-        <input type="text" name="inputTodo" placeholder="Enter todo..." class="text-xl bg-blue-100 w-full p-2 text-black rounded-md" [(ngModel)]="todoValue"/>
-        <input type="submit" value="Submit" class=" bg-blue-600 px-4 ms-2 rounded-md" (click)="addTodo()">
+<div class="flex flex-col md:w-[620px] justify-center items-center mx-auto p-2 bg-blue-200">
+    <form class="flex flex-row w-full justify-between py-2" (ngSubmit)="addTodo()">
+        <input type="text" name="inputTodo" placeholder="Enter Task" class="text-xl bg-blue-100 w-full p-2 text-black rounded-md border border-blue-800" [(ngModel)]="todoValue" required
+        #todoInput="ngModel"/>
+        <input type="submit" value="+ Add" class=" bg-green-600 px-4 ms-2 rounded-md text-white hover:bg-green-500 hover:cursor-pointer" (click)="addTodo()" [disabled]="todoInput.invalid"/>
     </form>
-    <h1 class="text-xl me-auto mb-2 px-2 bg-red-400 w-full">To-Do List</h1>
-    <div class="flex flex-row w-full justify-between items-center px-2 py-2 mb-1 even:bg-gray-200 odd:bg-gray-400" *ngFor="let todo of todoList; let i=index;">
-        <input type="checkbox" class="" [(ngModel)]="todo.value" (ngModelChange)="changeTodo(i)"/>
-        <div class=" text-xl mr-auto ps-4"> {{todo.content}} </div>
-        <button class="text-base bg-red-600 p-2 text-white rounded-md " (click)="removeTodo(i)">Remove</button>
+    <h1 class="text-xl me-auto mb-6 mt-4 p-2 rounded-md text-white text-center bg-red-400 w-full">To-Do List</h1>
+    <div class=" text-xl pb-4" *ngIf="todoList.length === 0">
+        <p> Your Tasks are Done! </p>
     </div>
-    <h1 class="text-xl me-auto mb-2 mt-1 px-2 bg-green-400 w-full" *ngIf="finishedList.length > 0">Finished List</h1>
-    <div class="flex flex-row w-full justify-between items-center px-2 py-2 mb-1 even:bg-gray-200 odd:bg-gray-400" *ngFor="let todo of finishedList; let i=index;">
-        <input type="checkbox" class="" [(ngModel)]="todo.value" (ngModelChange)="changeFinished(i)"/>
+    <div class="flex flex-row w-full justify-between items-center px-2 py-2 mb-1 even:bg-gray-300 odd:bg-white" *ngFor="let todo of todoList; let i=index;"> 
+        <input type="checkbox" class="w-4 h-4" [(ngModel)]="todo.value" (ngModelChange)="changeTodo(i)"/>
         <div class=" text-xl mr-auto ps-4"> {{todo.content}} </div>
-        <button class="text-base bg-red-600 p-2 text-white rounded-md " (click)="removeFinished(i)">Remove</button>
+        <button class="text-base bg-red-600 hover:bg-red-500 p-2 text-white rounded-md " (click)="removeTodo(i)">Remove</button>
+    </div>
+    <h1 class="text-xl me-auto mb-2 mt-7 p-2 rounded-md text-white text-center bg-green-400 w-full" *ngIf="finishedList.length > 0">Finished List</h1>
+    <div class="flex flex-row w-full justify-between items-center px-2 py-2 mb-1 even:bg-gray-300 odd:bg-white" *ngFor="let todo of finishedList; let i=index;">
+        <input type="checkbox" class="w-4 h-4" [(ngModel)]="todo.value" (ngModelChange)="changeFinished(i)"/>
+        <div class=" text-xl mr-auto ps-4"> {{todo.content}} </div>
+        <button class="text-base bg-red-600 hover:bg-red-500 p-2 text-white rounded-md " (click)="removeFinished(i)">Delete</button>
     </div>
 </div>

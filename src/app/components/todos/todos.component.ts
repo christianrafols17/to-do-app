@@ -12,11 +12,11 @@ export class TodosComponent {
   
   todoList: Todo[] = [
     {
-      content: "Todo 1",
+      content: "First Todo",
       value: false
     },
     {
-      content: "Todo 2",
+      content: "Second Todo",
       value: false
     }
   ];
