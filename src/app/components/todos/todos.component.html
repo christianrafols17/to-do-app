@@ -15,17 +15,19 @@
     </div>
     <div class=" grid grid-cols-2 gap-10">
         <div class="flex flex-col w-[240px] h-[180px] gap-2 justify-center items-center px-2 py-2 mb-1 bg-gray-400 bg-opacity-40 border border-white rounded-md" *ngFor="let todo of todoList; let i=index;"> 
-            <button class="" (click)="changeTodo(i, todo.value)"><fa-icon [icon]="faCheckCircle" class="text-2xl text-gray-400 hover:text-green-600"></fa-icon></button>
+            <button (click)="changeTodo(i, todo.value)"><fa-icon [icon]="faCheckCircle" class="text-2xl text-gray-400 hover:text-green-600"></fa-icon></button>
             <div class=" text-xl"> {{todo.content}} </div>
             <p class="description"> {{todo.description}} </p>
             <button class="text-base bg-red-600 hover:bg-red-500 p-2 text-white rounded-md " (click)="removeTodo(i)">Remove</button>
         </div>
     </div>
-    <h1 class="text-xl me-auto mb-2 mt-7 p-2 rounded-md text-white text-center bg-green-400 w-full" *ngIf="finishedList.length > 0">Finished List</h1>
-    <div class="flex flex-row w-full justify-between items-center px-2 py-2 mb-1 even:bg-gray-300 odd:bg-white" *ngFor="let todo of finishedList; let i=index;">
-        <button class="w-4 h-4" (click)="changeFinished(i, todo.value)"><fa-icon [icon]="faCheckCircle" class="text-green-600 hover:text-gray-400"></fa-icon></button>
-        <div class=" text-xl mr-auto ps-4"> {{todo.content}} </div>
+    <h1 class="text-xl me-auto mb-6 mt-7 p-2 rounded-md text-white text-center bg-green-400 w-full" *ngIf="finishedList.length > 0">Finished List</h1>
+    <div class=" grid grid-cols-2 gap-10">
+    <div class="flex flex-col w-[240px] h-[180px] gap-2 justify-between items-center px-2 py-2 mb-1 bg-green-400 bg-opacity-40 border border-green-600 rounded-md" *ngFor="let todo of finishedList; let i=index;">
+        <button class="text-2xl" (click)="changeFinished(i, todo.value)"><fa-icon [icon]="faCheckCircle" class="text-green-600 hover:text-gray-400"></fa-icon></button>
+        <div class=" text-xl"> {{todo.content}} </div>
         <p class="description"> {{todo.description}} </p>
         <button class="text-base bg-red-600 hover:bg-red-500 p-2 text-white rounded-md " (click)="removeFinished(i)">Delete</button>
+    </div>
     </div>
 </div>
