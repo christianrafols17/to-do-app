@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Todo } from '../../models/Todo';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-todos',
@@ -12,6 +12,7 @@ export class TodosComponent {
   todoValue: String = '';
   descValue: String = '';
   faCheckCircle = faCheckCircle;
+  faTrashCan = faTrashCan;
 
   showForm = false;
   
@@ -49,11 +50,11 @@ export class TodosComponent {
     this.todoList.push(item[0]);
   }
 
-  removeTodo(i: number) {
+  removeTodo(i: number, value: boolean) {
     this.todoList.splice(i, 1);
   }
 
-  removeFinished(i: number) {
+  removeFinished(i: number, value: boolean) {
     this.finishedList.splice(i, 1);
   }
 }
